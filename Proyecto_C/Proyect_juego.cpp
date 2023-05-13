@@ -9,7 +9,9 @@ void graficos(int x){
     cout << endl;
 }
 
-int main(){
+
+
+void partida() {
     string jugador1, jugador2;
     int puntos_jugador1 = 0, puntos_jugador2 = 0;
     int jugador = 1;
@@ -22,10 +24,10 @@ int main(){
     cout << "Ingrese el nombre del jugador 2: ";
     cin >> jugador2;
 
-    while (i>=1 && !fin){
-        graficos (fila1);
-        graficos (fila2);
-        graficos (fila3);
+    while (i >= 1 && !fin) {
+        graficos(fila1);
+        graficos(fila2);
+        graficos(fila3);
 
         cout << "Turno del jugador " << jugador << endl;
         cout << "Objetos en la fila 1: " << fila1 << endl;
@@ -41,12 +43,13 @@ int main(){
 
         cout << "Escoja un número de piezas: ";
         cin >> piezas_q;
-        while (piezas_q < 1 || piezas_q > fila1 && fila == 1 || piezas_q > fila2 && fila == 2 || piezas_q > fila3 && fila == 3) {
+        while (piezas_q < 1 || piezas_q > fila1 && fila == 1 || piezas_q > fila2 && fila == 2 ||
+               piezas_q > fila3 && fila == 3) {
             cout << "Opción inválida, escoja un número de piezas: ";
             cin >> piezas_q;
         }
 
-        switch (fila){
+        switch (fila) {
             case 1:
                 fila1 -= piezas_q;
                 break;
@@ -82,29 +85,67 @@ int main(){
                 puntos_jugador1 += 3;
             }
             fin = true;
+        } else if (fila1 == 0 && fila2 == 1 && fila3 == 0) {
+            cout << "El jugador " << jugador << " pierde." << endl;
+            if (jugador == 1) {
+                puntos_jugador2 += 3;
+            } else {
+                puntos_jugador1 += 3;
+            }
+            fin = true;
+        } else if (fila1 == 1 && fila2 == 0 && fila3 == 0) {
+            cout << "El jugador " << jugador << " pierde." << endl;
+            if (jugador == 1) {
+                puntos_jugador2 += 3;
+            } else {
+                puntos_jugador1 += 3;
+            }
+            fin = true;
+        } else if (fila1 == 0 && fila2 == 0 && fila3 == 0) {
+            cout << "Empate." << endl;
+            puntos_jugador1 += 1;
+            puntos_jugador2 += 1;
+            fin = true;
         }
-
         if (!fin) {
             if (jugador == 1) {
                 jugador = 2;
             } else {
                 jugador = 1;
             }
-            i--;
         }
 
-        cout << endl << "Juego terminado" << endl;
-        cout << "Puntaje final:" << endl;
-        cout << jugador1 << ": " << puntos_jugador1 << " puntos" << endl;
-        cout << jugador2 << ": " << puntos_jugador2 << " puntos" << endl;
-        if (puntos_jugador1 > puntos_jugador2) {
-            cout << jugador1 << " gana!" << endl;
-        } else if (puntos_jugador2 > puntos_jugador1) {
-            cout << jugador2 << " gana!" << endl;
-        } else {
-            cout << "Empate!" << endl;
-        }
+        cout << endl;
+    }
+
+    cout << "Jugador " << jugador1 << " tiene " << puntos_jugador1 << " puntos." << endl;
+    cout << "Jugador " << jugador2 << " tiene " << puntos_jugador2 << " puntos." << endl;
+
+    
+    if (puntos_jugador1 > puntos_jugador2) {
+        cout << "¡Felicitaciones " << jugador1 << ", has ganado el juego!" << endl;
+    } else if (puntos_jugador2 > puntos_jugador1) {
+        cout << "¡Felicitaciones " << jugador2 << ", has ganado el juego!" << endl;
+    } else if (puntos_jugador2 == puntos_jugador1){
+        cout << "¡El juego ha terminado en empate!" << endl;
+    }
+
+}
+
+
+
+ int main(){
+    partida();
+    // preguntar si se desea jugar otra ronda
+    char jugar_otra;
+    cout << "¿Desea jugar otra ronda? (s/n): ";
+    cin >> jugar_otra;
+    if (jugar_otra == 's') {
+        // reiniciar variables para una nueva ronda
+        partida();
+    } else if (jugar_otra == 'n'){
+        // finalizar juego
+        cout << "Gracias por jugar!" << endl;
     }
     return 0;
- xd
 }
