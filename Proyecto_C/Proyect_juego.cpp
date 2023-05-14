@@ -2,6 +2,8 @@
 #include <string>
 using namespace std;
 
+int puntos_jugador1f=0,puntos_jugador2f=0;
+
 void graficos(int x){
     for (int i = 0; i < x; i++) {
         cout << char(219)<< " ";
@@ -9,10 +11,15 @@ void graficos(int x){
     cout << endl;
 }
 
-
+void puntos (int x, int y){
+	extern int puntos_jugador1f, puntos_jugador2f;
+	puntos_jugador1f+=x;
+	puntos_jugador2f+=y;
+	
+}
 
 void partida(string jugador1, string jugador2) {
-    
+    cout<<"El jugador 1 tiene: "<<puntos_jugador1f<<" puntos."<<endl<<"El jugador 2 tiene: "<<puntos_jugador2f<<" puntos."<<endl;
     int puntos_jugador1 = 0, puntos_jugador2 = 0;
     int jugador = 1;
     int fila1 = 3, fila2 = 5, fila3 = 7, fila = 0, piezas_q;
@@ -82,17 +89,10 @@ void partida(string jugador1, string jugador2) {
         cout << endl;
     }
 
-    cout << "Jugador " << jugador1 << " tiene " << puntos_jugador1 << " puntos." << endl;
-    cout << "Jugador " << jugador2 << " tiene " << puntos_jugador2 << " puntos." << endl;
+    puntos(puntos_jugador1,puntos_jugador2);
     
     
-    if (puntos_jugador1 > puntos_jugador2) {
-        cout << "¡Felicitaciones " << jugador1 << ", has ganado el juego!" << endl;
-    } else if (puntos_jugador2 > puntos_jugador1) {
-        cout << "¡Felicitaciones " << jugador2 << ", has ganado el juego!" << endl;
-    } else if (puntos_jugador2 == puntos_jugador1){
-        cout << "¡El juego ha terminado en empate!" << endl;
-    }
+    
 
 }
 
@@ -104,17 +104,32 @@ void partida(string jugador1, string jugador2) {
     cin >> jugador1;
     cout << "Ingrese el nombre del jugador 2: ";
     cin >> jugador2;
+    
     partida(jugador1, jugador2);
     // preguntar si se desea jugar otra ronda
+    
     char jugar_otra;
     cout << "¿Desea jugar otra ronda? (s/n): ";
     cin >> jugar_otra;
+    while (jugar_otra=='s'){
+	
     if (jugar_otra == 's') {
         // reiniciar variables para una nueva ronda
         partida(jugador1, jugador2);
+        cout << "¿Desea jugar otra ronda? (s/n): ";
+    cin >> jugar_otra;
     } else if (jugar_otra == 'n'){
         // finalizar juego
         cout << "Gracias por jugar!" << endl;
+    }
+    }
+    cout<<"El jugador 1 tiene: "<<puntos_jugador1f<<" puntos."<<endl<<"El jugador 2 tiene: "<<puntos_jugador2f<<" puntos."<<endl;
+    if (puntos_jugador1f > puntos_jugador2f) {
+        cout << "¡Felicitaciones " << jugador1 << ", has ganado el juego!" << endl;
+    } else if (puntos_jugador2f > puntos_jugador1f) {
+        cout << "¡Felicitaciones " << jugador2 << ", has ganado el juego!" << endl;
+    } else if (puntos_jugador2f == puntos_jugador1f){
+        cout << "¡El juego ha terminado en empate!" << endl;
     }
     return 0;
 }
