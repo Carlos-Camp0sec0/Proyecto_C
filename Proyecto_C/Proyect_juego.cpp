@@ -53,10 +53,14 @@ void partida(string jugador1, string jugador2) {
         cout << "Objetos en la fila 2: " << fila2 << endl;
         cout << "Objetos en la fila 3: " << fila3 << endl;
 /* Luego se solicita al usuario que elija una fila (1, 2 o 3) y un número de piezas de esa fila. */
-        cout << "Escoja la fila (1-3): ";
+       
+		cout << "Escoja la fila (1-3): ";
         cin >> fila;
  /* Se verifica que la fila seleccionada esté dentro del rango válido (1-3). Si la entrada es inválida, se le pide al usuario
  que vuelva a ingresar una fila válida. */
+ 		while ((fila==1&&fila1==0)||(fila==2&&fila2==0)||(fila==3&&fila3==0)){
+		 cout <<endl<<"opcion invalida, escoja la fila (1-3): ";
+            cin >> fila;}
         while (fila < 1 || fila > 3) {
             cout <<endl<<"opcion invalida, escoja la fila (1-3): ";
             cin >> fila;
@@ -155,5 +159,5 @@ int main(){
     } else if (puntos_jugador2f == puntos_jugador1f){
         cout << "¡El juego ha terminado en empate!" << endl;
     }
-    return 0;
+    return 0;
 }
